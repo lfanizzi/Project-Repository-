@@ -125,7 +125,7 @@ LCD_WriteStringAtPos("Decimal", 1, 3);
 
 
 while(1){
-    change_display();
+    //change_display();
    toggle_display(display,decimal);
    
     
@@ -207,35 +207,35 @@ void delay_ms(int DELAY) {
         } //software delay 1 millisec
     }
 }
-void change_display(){
-    //current_num += new_component;
+void change_display(int new_component){
+    current_num += new_component;
     int j;
     for(j=0;j<size;j++){
-           display[j] = display[j+1];// Problem with assignments, need to look over logic
+           display[j] = display[j+1];// moves values down array, allows for scrolling
     }
            //display[0] = new_component;
-           display[0] = current_num % 10;
+            display[0] = current_num % 10;
             display[1] = (current_num/10) % 10;
             display[2] = current_num % 10;
             display[3] = (current_num/10) % 10;
             
-           d0 = SSD_GetDigitSegments(display[0]);
+           /*d0 = SSD_GetDigitSegments(display[0]);
            d1 = SSD_GetDigitSegments(display[1]);
            d2 = SSD_GetDigitSegments(display[2]);
            d3 = SSD_GetDigitSegments(display[3]);
            
            
                    
-           SSD_WriteDigits(d3,d2,d1,d0,0,0,0,0);
+           SSD_WriteDigits(d3,d2,d1,d0,0,0,0,0);*/
 }
-void update_display(void){
+//void update_display(void){
      //d0 = SSD_GetDigitSegments(display[0]);
      //d1 = SSD_GetDigitSegments(display[1]);
      //d2 = SSD_GetDigitSegments(display[2]);
      //d3 = SSD_GetDigitSegments(display[3]);
      //SSD_WriteDigits(one,two,three,four,0,0,0,0);
-    SSD_WriteDigits(d3,d2,d1,d0,0,0,0,0);
-}
+   // SSD_WriteDigits(d3,d2,d1,d0,0,0,0,0);
+//}
 
 
 int addition(int operand1,int operand2){
@@ -264,6 +264,14 @@ void clear_SSD(void){
 
 unsigned char hex(int num){
     // convert num to hex
+    int rem = 1;
+    while(rem){
+    int remainder = num % 16;
+    num = num / 16;
+    if(remainder == 0){
+        unsigned char new_num = num;
+    }
+    }
     
     
 }
